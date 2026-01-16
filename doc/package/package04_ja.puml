@@ -1,0 +1,28 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "app" <<Package>> {
+  
+  package "ui" <<Package>> as ui
+  package "logic" <<Package>> as logic
+  package "data" <<Package>> as data
+}
+
+' 依存関係
+ui ..> logic : 呼び出す
+logic ..> data : アクセスする
+
+@enduml

@@ -1,0 +1,75 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 11
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "myapp" <<Package>> {
+  
+  package "api" <<Package>> {
+    package "endpoints" <<Package>> as endpoints
+    package "middleware" <<Package>> as middleware
+  }
+  
+  package "core" <<Package>> {
+    package "models" <<Package>> as models
+    package "schemas" <<Package>> as schemas
+    package "services" <<Package>> as services
+  }
+  
+  package "infrastructure" <<Package>> {
+    package "database" <<Package>> as database
+    package "repositories" <<Package>> as repositories
+    package "cache" <<Package>> as cache
+  }
+  
+  package "common" <<Package>> {
+    package "auth" <<Package>> as auth
+    package "logging" <<Package>> as logging
+    package "exceptions" <<Package>> as exceptions
+    package "config" <<Package>> as config
+  }
+  
+  package "tasks" <<Package>> as tasks
+  package "tests" <<Package>> as tests
+}
+
+' Dependencies
+endpoints ..> middleware : use
+endpoints ..> services : call
+endpoints ..> schemas : validate
+endpoints ..> auth : authenticate
+
+services ..> models : manipulate
+services ..> repositories : access
+services ..> cache : cache-data
+services ..> exceptions : raise
+
+repositories ..> database : query
+repositories ..> models : map
+
+middleware ..> logging : log
+middleware ..> auth : verify
+
+tasks ..> services : execute
+tasks ..> logging : log
+
+schemas ..> models : validate
+
+database ..> config : read
+cache ..> config : configure
+
+tests ..> services : test
+tests ..> repositories : mock
+
+@enduml

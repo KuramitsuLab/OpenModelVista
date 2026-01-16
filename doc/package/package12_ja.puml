@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "hospital" <<Package>> {
+  
+  package "medical" <<Package>> {
+    package "departments" <<Package>> as departments
+    package "diagnoses" <<Package>> as diagnoses
+    package "treatments" <<Package>> as treatments
+    package "doctors" <<Package>> as doctors
+  }
+  
+  package "patient" <<Package>> {
+    package "records" <<Package>> as records
+    package "appointments" <<Package>> as appointments
+  }
+  
+  package "administration" <<Package>> {
+    package "billing" <<Package>> as billing
+    package "insurance" <<Package>> as insurance
+  }
+}
+
+' 依存関係
+appointments ..> departments : 予約する
+appointments ..> doctors : 担当医を指定
+
+diagnoses ..> records : 参照する
+treatments ..> diagnoses : 基づく
+
+doctors ..> diagnoses : 診断する
+doctors ..> treatments : 処方する
+
+billing ..> treatments : 請求する
+billing ..> insurance : 保険請求
+
+records ..> appointments : 追跡する
+
+@enduml

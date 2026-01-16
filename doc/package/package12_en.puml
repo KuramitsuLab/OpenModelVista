@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "hospital" <<Package>> {
+  
+  package "medical" <<Package>> {
+    package "departments" <<Package>> as departments
+    package "diagnoses" <<Package>> as diagnoses
+    package "treatments" <<Package>> as treatments
+    package "doctors" <<Package>> as doctors
+  }
+  
+  package "patient" <<Package>> {
+    package "records" <<Package>> as records
+    package "appointments" <<Package>> as appointments
+  }
+  
+  package "administration" <<Package>> {
+    package "billing" <<Package>> as billing
+    package "insurance" <<Package>> as insurance
+  }
+}
+
+' 依存関係
+appointments ..> departments : schedule
+appointments ..> doctors : assign
+
+diagnoses ..> records : refer
+treatments ..> diagnoses : based-on
+
+doctors ..> diagnoses : make
+doctors ..> treatments : prescribe
+
+billing ..> treatments : charge
+billing ..> insurance : claim
+
+records ..> appointments : track
+
+@enduml

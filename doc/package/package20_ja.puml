@@ -1,0 +1,79 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 11
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "bookstore" <<Package>> {
+  
+  package "catalog" <<Package>> {
+    package "books" <<Package>> as books
+    package "authors" <<Package>> as authors
+    package "categories" <<Package>> as categories
+    package "reviews" <<Package>> as reviews
+  }
+  
+  package "shopping" <<Package>> {
+    package "cart" <<Package>> as cart
+    package "checkout" <<Package>> as checkout
+    package "payment" <<Package>> as payment
+    package "shipping" <<Package>> as shipping
+  }
+  
+  package "user" <<Package>> {
+    package "accounts" <<Package>> as accounts
+    package "profiles" <<Package>> as profiles
+    package "wishlist" <<Package>> as wishlist
+  }
+  
+  package "admin" <<Package>> {
+    package "inventory" <<Package>> as inventory
+    package "analytics" <<Package>> as analytics
+  }
+  
+  package "common" <<Package>> {
+    package "notifications" <<Package>> as notifications
+    package "search" <<Package>> as search
+    package "recommendations" <<Package>> as recommendations
+  }
+}
+
+' 依存関係
+books ..> authors : 著者情報
+books ..> categories : カテゴリ分類
+reviews ..> books : 評価する
+reviews ..> accounts : 投稿者
+
+cart ..> books : 追加する
+cart ..> accounts : ユーザー識別
+wishlist ..> books : 保存する
+
+checkout ..> cart : 処理する
+checkout ..> payment : 決済する
+checkout ..> shipping : 配送手配
+checkout ..> accounts : 確認する
+
+payment ..> notifications : 通知する
+shipping ..> notifications : 状況更新
+
+profiles ..> accounts : 拡張する
+
+inventory ..> books : 在庫管理
+analytics ..> books : 分析する
+analytics ..> reviews : 追跡する
+
+search ..> books : 検索する
+recommendations ..> books : 推薦する
+recommendations ..> reviews : 基づく
+
+@enduml

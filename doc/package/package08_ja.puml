@@ -1,0 +1,42 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "school" <<Package>> {
+  
+  package "academic" <<Package>> {
+    package "courses" <<Package>> as courses
+    package "grades" <<Package>> as grades
+    package "attendance" <<Package>> as attendance
+  }
+  
+  package "people" <<Package>> {
+    package "students" <<Package>> as students
+    package "teachers" <<Package>> as teachers
+  }
+}
+
+' 依存関係
+students ..> courses : 履修する
+teachers ..> courses : 担当する
+
+grades ..> courses : 評価する
+grades ..> students : 記録する
+grades ..> teachers : 入力する
+
+attendance ..> courses : 追跡する
+attendance ..> students : 確認する
+
+@enduml

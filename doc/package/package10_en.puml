@@ -1,0 +1,52 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "webapp" {
+  
+  package "frontend" <<Package>> {
+    package "components" <<Package>> as components
+    package "pages" <<Package>> as pages
+  }
+  
+  package "backend" <<Package>> {
+    package "routes" <<Package>> as routes
+    package "controllers" <<Package>> as controllers
+    package "models" <<Package>> as models
+  }
+  
+  package "shared" <<Package>> {
+    package "auth" <<Package>> as auth
+    package "database" <<Package>> as database
+    package "config" <<Package>> as config
+  }
+}
+
+' Dependencies
+pages ..> components : render
+pages ..> routes : request
+
+routes ..> controllers : route-to
+routes ..> auth : authenticate
+
+controllers ..> models : use
+controllers ..> auth : authorize
+
+models ..> database : persist
+
+database ..> config : configure
+auth ..> config : read
+
+@enduml

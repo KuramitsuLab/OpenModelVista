@@ -1,0 +1,42 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 12
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "school" <<Package>> {
+  
+  package "academic" <<Package>> {
+    package "courses" <<Package>> as courses
+    package "grades" <<Package>> as grades
+    package "attendance" <<Package>> as attendance
+  }
+  
+  package "people" <<Package>> {
+    package "students" <<Package>> as students
+    package "teachers" <<Package>> as teachers
+  }
+}
+
+' Dependencies
+students ..> courses : enroll
+teachers ..> courses : teach
+
+grades ..> courses : evaluate
+grades ..> students : assign
+grades ..> teachers : record
+
+attendance ..> courses : track
+attendance ..> students : check
+
+@enduml

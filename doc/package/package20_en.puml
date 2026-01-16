@@ -1,0 +1,79 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 11
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "bookstore" <<Package>> {
+  
+  package "catalog" <<Package>> {
+    package "books" <<Package>> as books
+    package "authors" <<Package>> as authors
+    package "categories" <<Package>> as categories
+    package "reviews" <<Package>> as reviews
+  }
+  
+  package "shopping" <<Package>> {
+    package "cart" <<Package>> as cart
+    package "checkout" <<Package>> as checkout
+    package "payment" <<Package>> as payment
+    package "shipping" <<Package>> as shipping
+  }
+  
+  package "user" <<Package>> {
+    package "accounts" <<Package>> as accounts
+    package "profiles" <<Package>> as profiles
+    package "wishlist" <<Package>> as wishlist
+  }
+  
+  package "admin" <<Package>> {
+    package "inventory" <<Package>> as inventory
+    package "analytics" <<Package>> as analytics
+  }
+  
+  package "common" <<Package>> {
+    package "notifications" <<Package>> as notifications
+    package "search" <<Package>> as search
+    package "recommendations" <<Package>> as recommendations
+  }
+}
+
+' Dependencies
+books ..> authors : written-by
+books ..> categories : belong-to
+reviews ..> books : rate
+reviews ..> accounts : authored-by
+
+cart ..> books : add
+cart ..> accounts : identify
+wishlist ..> books : save
+
+checkout ..> cart : process
+checkout ..> payment : charge
+checkout ..> shipping : arrange
+checkout ..> accounts : verify
+
+payment ..> notifications : notify
+shipping ..> notifications : update
+
+profiles ..> accounts : extend
+
+inventory ..> books : manage
+analytics ..> books : analyze
+analytics ..> reviews : track
+
+search ..> books : index
+recommendations ..> books : suggest
+recommendations ..> reviews : based-on
+
+@enduml

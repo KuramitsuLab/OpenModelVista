@@ -1,0 +1,75 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 11
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "myapp" <<Package>> {
+  
+  package "api" <<Package>> {
+    package "endpoints" <<Package>> as endpoints
+    package "middleware" <<Package>> as middleware
+  }
+  
+  package "core" <<Package>> {
+    package "models" <<Package>> as models
+    package "schemas" <<Package>> as schemas
+    package "services" <<Package>> as services
+  }
+  
+  package "infrastructure" <<Package>> {
+    package "database" <<Package>> as database
+    package "repositories" <<Package>> as repositories
+    package "cache" <<Package>> as cache
+  }
+  
+  package "common" <<Package>> {
+    package "auth" <<Package>> as auth
+    package "logging" <<Package>> as logging
+    package "exceptions" <<Package>> as exceptions
+    package "config" <<Package>> as config
+  }
+  
+  package "tasks" <<Package>> as tasks
+  package "tests" <<Package>> as tests
+}
+
+' 依存関係
+endpoints ..> middleware : 使用する
+endpoints ..> services : 呼び出す
+endpoints ..> schemas : バリデーション
+endpoints ..> auth : 認証する
+
+services ..> models : 操作する
+services ..> repositories : アクセスする
+services ..> cache : キャッシュする
+services ..> exceptions : 例外を発生
+
+repositories ..> database : クエリ実行
+repositories ..> models : マッピング
+
+middleware ..> logging : ログ出力
+middleware ..> auth : 検証する
+
+tasks ..> services : 実行する
+tasks ..> logging : ログ出力
+
+schemas ..> models : 検証する
+
+database ..> config : 設定読込
+cache ..> config : 設定する
+
+tests ..> services : テストする
+tests ..> repositories : モック化
+
+@enduml

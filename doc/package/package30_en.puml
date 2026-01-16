@@ -1,0 +1,112 @@
+@startuml
+!theme plain
+
+skinparam packageStyle rectangle
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+  BorderThickness 2
+  FontSize 11
+}
+
+skinparam arrow {
+  Color Black
+  Thickness 1
+}
+
+package "bookstore" <<Package>> {
+  
+  package "catalog" <<Package>> {
+    package "books" <<Package>> as books
+    package "authors" <<Package>> as authors
+    package "publishers" <<Package>> as publishers
+    package "categories" <<Package>> as categories
+    package "reviews" <<Package>> as reviews
+  }
+  
+  package "ordering" <<Package>> {
+    package "cart" <<Package>> as cart
+    package "orders" <<Package>> as orders
+    package "payments" <<Package>> as payments
+    package "shipping" <<Package>> as shipping
+  }
+  
+  package "customer" <<Package>> {
+    package "accounts" <<Package>> as accounts
+    package "profiles" <<Package>> as profiles
+    package "wishlists" <<Package>> as wishlists
+    package "purchase-history" <<Package>> as purchase_history
+  }
+  
+  package "inventory" <<Package>> {
+    package "warehouses" <<Package>> as warehouses
+    package "stock" <<Package>> as stock
+    package "suppliers" <<Package>> as suppliers
+  }
+  
+  package "marketing" <<Package>> {
+    package "campaigns" <<Package>> as campaigns
+    package "coupons" <<Package>> as coupons
+    package "recommendations" <<Package>> as recommendations
+  }
+  
+  package "admin" <<Package>> {
+    package "reports" <<Package>> as reports
+    package "analytics" <<Package>> as analytics
+  }
+  
+  package "common" <<Package>> {
+    package "auth" <<Package>> as auth
+    package "notifications" <<Package>> as notifications
+    package "search" <<Package>> as search
+    package "logging" <<Package>> as logging
+    package "config" <<Package>> as config
+  }
+}
+
+' Catalog dependencies
+books ..> authors : written-by
+books ..> publishers : published-by
+books ..> categories : belong-to
+reviews ..> books : rate
+reviews ..> accounts : authored-by
+
+' Ordering dependencies
+cart ..> books : add-item
+cart ..> accounts : belong-to
+orders ..> cart : checkout
+orders ..> payments : process
+orders ..> shipping : arrange
+orders ..> coupons : apply-discount
+shipping ..> warehouses : ship-from
+
+' Customer dependencies
+profiles ..> accounts : extend
+wishlists ..> books : save
+wishlists ..> accounts : belong-to
+purchase_history ..> orders : track
+
+' Inventory dependencies
+stock ..> books : track-quantity
+stock ..> warehouses : store-at
+warehouses ..> suppliers : order-from
+
+' Marketing dependencies
+campaigns ..> books : promote
+coupons ..> orders : discount
+recommendations ..> books : suggest
+recommendations ..> purchase_history : analyze
+
+' Admin dependencies
+reports ..> orders : generate
+reports ..> stock : summarize
+analytics ..> purchase_history : analyze
+
+' Common dependencies
+auth ..> accounts : authenticate
+notifications ..> orders : notify
+notifications ..> shipping : update
+search ..> books : index
+logging ..> config : configure
+
+@enduml
