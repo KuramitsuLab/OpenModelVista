@@ -1,0 +1,18 @@
+@startuml
+
+object "山田さん：社員" as yamada
+
+object "鈴木さん：社員" as suzuki
+
+object "渡辺さん：社員" as watanabe
+
+object "：部署" as department {
+  部署名 = "開発部"
+  電話番号 = "99-9999-9999"
+}
+
+yamada --> department
+suzuki --> department
+watanabe --> department
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+
+component "DB Access Component" {
+    component "Data processing"
+    component "Database connection\nprocessing"
+    
+    "Data processing" -- "Database connection\nprocessing"
+}
+
+interface "Processing results" as PR
+interface "Processing Request" as PRQ
+interface "Connection Request" as CR
+
+PR -- "DB Access Component"
+PRQ )-- "DB Access Component"
+"DB Access Component" --( CR
+
+@enduml

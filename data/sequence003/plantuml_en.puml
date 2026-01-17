@@ -1,0 +1,31 @@
+@startuml
+actor "A: Actor" as actor
+participant ": Login Screen" as login_screen
+participant ": Login Process" as login_process
+participant ": Member List" as member_list
+participant "A's Member Information:\nMember Information" as member_info
+
+actor -> login_screen: Enter login information (Member ID, Password)
+activate login_screen
+login_screen -> login_process: Login (Member ID, Password)
+activate login_process
+
+login_process -> member_list: A's Member Information = Retrieve member information (Member ID)
+activate member_list
+member_list --> login_process
+deactivate member_list
+
+login_process -> member_info: Authentication Result = Authenticate (Password)
+activate member_info
+member_info --> login_process
+deactivate member_info
+
+alt Authentication Result = OK
+    login_process --> login_screen: Transition to Member Service Screen ()
+else Authentication Result = NG
+    login_process --> login_screen: Transition to Authentication Error Screen ()
+end
+
+deactivate login_process
+destroy login_screen
+@enduml

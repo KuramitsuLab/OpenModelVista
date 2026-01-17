@@ -1,0 +1,32 @@
+@startuml
+
+left to right direction
+
+actor "Online Customer" as OnlineCustomer
+actor "Credit Company" as CreditCompany
+actor "Timer" as Timer
+actor "Delivery Person" as DeliveryPerson
+actor "Warehouse Staff" as WarehouseStaff
+
+usecase "Cancel Order" as CancelOrder
+usecase "Order Books" as OrderBooks
+usecase "Approve Invoice" as ApproveInvoice
+usecase "Reject Invoice" as RejectInvoice
+usecase "Deliver Order" as DeliverOrder
+usecase "Pack and Ship Order" as PackAndShipOrder
+usecase "Restock Products" as RestockProducts
+
+OnlineCustomer --> CancelOrder
+OnlineCustomer --> OrderBooks
+
+Timer --> CancelOrder
+
+CreditCompany --> ApproveInvoice
+CreditCompany --> RejectInvoice
+
+DeliveryPerson --> DeliverOrder
+
+WarehouseStaff --> PackAndShipOrder
+WarehouseStaff --> RestockProducts
+
+@enduml

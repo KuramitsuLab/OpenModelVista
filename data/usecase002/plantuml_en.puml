@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+
+actor "Depositor" as Depositor
+actor "Remittance Requester" as RemittanceRequester
+actor "Other Bank" as OtherBank
+
+RemittanceRequester --|> Depositor
+
+rectangle "ATM" {
+    usecase "Enter PIN" as EnterPIN
+    usecase "Withdraw Money" as WithdrawMoney
+    usecase "Deposit Money" as DepositMoney
+    usecase "Update Passbook" as UpdatePassbook
+    usecase "Request Account Transfer\n(Remittance)" as RequestTransfer
+}
+
+Depositor ..> EnterPIN : <<include>>
+Depositor --> WithdrawMoney
+Depositor --> DepositMoney
+Depositor --> UpdatePassbook
+
+WithdrawMoney ..> EnterPIN : <<include>>
+
+RemittanceRequester --> RequestTransfer
+OtherBank --> RequestTransfer
+
+@enduml

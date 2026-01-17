@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+group ref 도서 관리 시스템의 처리 방식 선택
+end group
+
+if () then ([반납할 책])
+    group ref 도서 반납
+    end group
+else ([대출할 책])
+    group ref 도서 대출
+    end group
+endif
+
+stop
+
+@enduml

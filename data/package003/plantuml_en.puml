@@ -1,0 +1,23 @@
+@startuml
+
+package "ui" {
+    class OrderFrame
+}
+
+package "service" {
+    class OrderControl
+}
+
+package "bean" {
+    class OrderBean
+}
+
+ui ..> service
+ui ..> bean
+service ..> bean
+
+OrderFrame --> OrderControl
+OrderFrame --> OrderBean
+OrderControl --> OrderBean
+
+@enduml

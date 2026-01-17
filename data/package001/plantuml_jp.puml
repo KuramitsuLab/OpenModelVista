@@ -1,0 +1,15 @@
+@startuml
+
+package "ui" {
+}
+
+package "service" {
+}
+
+package "domain" {
+}
+
+ui ..> service
+service ..> domain
+
+@enduml

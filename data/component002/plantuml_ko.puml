@@ -1,0 +1,18 @@
+@startuml
+
+component "DB 액세스 구성 요소" {
+    component "데이터 처리"
+    component "데이터베이스 연결 처리"
+    
+    "데이터 처리" -- "데이터베이스 연결 처리"
+}
+
+interface "처리 결과" as PR
+interface "요청 처리" as PRQ
+interface "연결 요청" as CR
+
+PR -- "DB 액세스 구성 요소"
+PRQ )-- "DB 액세스 구성 요소"
+"DB 액세스 구성 요소" --( CR
+
+@enduml

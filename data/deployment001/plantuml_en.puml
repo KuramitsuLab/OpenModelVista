@@ -1,0 +1,16 @@
+@startuml
+
+node "Printer" as Printer
+
+node "Desktop Client" as DesktopClient {
+    component "User\nInterface" as UI
+}
+
+node "Central Server" as CentralServer {
+    component "Database" as Database
+}
+
+Printer -- DesktopClient
+DesktopClient -- CentralServer
+
+@enduml

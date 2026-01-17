@@ -1,0 +1,10 @@
+@startuml
+
+rectangle "トップページ" as top
+rectangle "お知らせ一覧" as news
+rectangle "採用ページ" as recruit
+
+top <--> news
+top <--> recruit
+
+@enduml

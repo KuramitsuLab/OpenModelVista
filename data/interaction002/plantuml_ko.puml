@@ -1,0 +1,52 @@
+@startuml
+
+title sd 온라인 쇼핑
+
+start
+
+group sd 회원 가입
+    participant ": 사용자" as 사용자
+    participant ": 회원 가입\n화면" as 회원가입화면
+    participant ": 회원 가입\n관리" as 회원가입관리
+    participant ": 회원" as 회원
+    
+    사용자 -> 회원가입화면 : 회원 정보 입력
+    회원가입화면 -> 회원가입관리 : 회원 등록
+    회원가입관리 --> 회원 ** : 생성
+end group
+
+group 참조 회원 로그인
+end group
+
+if () then ([장바구니에 상품이 없습니다])
+    group sd 장바구니에 상품 담기
+        participant ": 회원" as 회원2
+        participant ": 장바구니\n화면" as 장바구니화면
+        participant ": 장바구니\n관리" as 장바구니관리
+        participant ": 장바구니" as 장바구니
+        
+        회원2 -> 장바구니화면 : 상품 추가
+        장바구니화면 -> 장바구니관리 : 상품 추가
+        장바구니관리 --> 장바구니 ** : 만들기\n생성
+    end group
+else ([장바구니에 담긴 상품])
+endif
+
+group 참조 장바구니 보기
+end group
+
+group sd 주문하기
+    participant ": 회원" as 회원3
+    participant ": 주문\n화면" as 주문화면
+    participant ": 주문\n관리" as 주문관리
+    participant ": 주문" as 주문
+    
+    회원3 -> 주문화면 : 주문 확인
+    주문화면 -> 주문관리 : 주문 등록
+    주문관리 --> 주문 ** : 생성
+    주문관리 -> 주문 : 장바구니 항목 설정
+end group
+
+stop
+
+@enduml

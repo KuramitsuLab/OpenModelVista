@@ -1,0 +1,23 @@
+@startuml
+
+start
+
+if () then ([Logged in])
+    group sd Customer Support System Enquiries
+        actor "User" as User
+        participant "Support\nSystem" as SupportSystem
+        actor "Contact" as Contact
+        
+        User -> SupportSystem : 1: Details of the issue\nSubmission
+        SupportSystem -> Contact : 2: Troubleshooting\nNotification
+        Contact -> SupportSystem : 3: Completion of Issue Resolution\nMessage
+        SupportSystem --> User : 4: Troubleshooting\nNotification
+    end group
+else ([Not logged in])
+    group ref Login processing
+    end group
+endif
+
+stop
+
+@enduml

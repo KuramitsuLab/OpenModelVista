@@ -1,0 +1,11 @@
+@startuml
+
+component "Employees" as Employees
+component "Payroll Management" as PayrollManagement
+
+interface "Payroll Services" as PayrollServices
+
+Employees -- PayrollServices
+PayrollServices -- PayrollManagement
+
+@enduml

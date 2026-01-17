@@ -1,0 +1,35 @@
+@startuml
+
+entity "users (users)" as users {
+    * id (ID)
+    --
+    name (name)
+    email (email address)
+    delete_flag (delete flag)
+}
+
+entity "lendings (Loan status)" as lendings {
+    * id (ID)
+    --
+    user_id (user ID)
+    book_id (book ID)
+    lent_at (Loan date and time)
+    returned_at (return date and time)
+}
+
+entity "books (collection)" as books {
+    * id (ID)
+    --
+    title (Title)
+    author (author)
+    publisher (Publisher)
+    published_at (Release date)
+    ISBN
+    price (Price)
+    delete_flag (Delete flag)
+}
+
+users ||--o{ lendings
+lendings }o--|| books
+
+@enduml

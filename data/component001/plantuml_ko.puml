@@ -1,0 +1,11 @@
+@startuml
+
+component "직원" as 직원
+component "급여 관리" as 급여관리
+
+interface "급여 서비스" as 급여서비스
+
+직원 -- 급여서비스
+급여서비스 -- 급여관리
+
+@enduml

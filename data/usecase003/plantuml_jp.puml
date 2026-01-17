@@ -1,0 +1,32 @@
+@startuml
+
+left to right direction
+
+actor "オンライン顧客" as OnlineCustomer
+actor "信販会社" as CreditCompany
+actor "タイマー" as Timer
+actor "配達員" as DeliveryPerson
+actor "倉庫係員" as WarehouseStaff
+
+usecase "注文をキャンセルする" as CancelOrder
+usecase "書籍を注文する" as OrderBooks
+usecase "請求を承認する" as ApproveInvoice
+usecase "請求を拒否する" as RejectInvoice
+usecase "注文を配達する" as DeliverOrder
+usecase "注文の梱包と出荷を行う" as PackAndShipOrder
+usecase "製品を補充する" as RestockProducts
+
+OnlineCustomer --> CancelOrder
+OnlineCustomer --> OrderBooks
+
+Timer --> CancelOrder
+
+CreditCompany --> ApproveInvoice
+CreditCompany --> RejectInvoice
+
+DeliveryPerson --> DeliverOrder
+
+WarehouseStaff --> PackAndShipOrder
+WarehouseStaff --> RestockProducts
+
+@enduml

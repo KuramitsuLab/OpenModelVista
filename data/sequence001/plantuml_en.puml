@@ -1,0 +1,22 @@
+@startuml
+participant "User" as user
+participant "Shelf" as shelf
+participant "Book" as book
+
+user -> shelf: Search
+activate shelf
+shelf --> user: Search Result
+deactivate shelf
+
+user -> book: Loan Request
+activate book
+book --> user: Loan Result
+deactivate book
+
+activate user
+user -> book: Return Request
+activate book
+book --> user: Return Result
+deactivate book
+deactivate user
+@enduml

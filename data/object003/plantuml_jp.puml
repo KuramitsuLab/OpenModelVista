@@ -1,0 +1,53 @@
+@startuml
+
+object "佐藤：ユーザ" as sato {
+  氏名 = 佐藤純一
+  メールアドレス = satojun@example.com
+  パスワード = 0123
+}
+
+object "：友達申請" as tomodachi {
+  申請日 = 2022年8月14日
+  友達になった日 = 2022年8月15日
+}
+
+object "田中：ユーザ" as tanaka {
+  氏名 = 田中春子
+  メールアドレス = haru@example.com
+  パスワード = 8686
+}
+
+object "：コメント" as comment {
+  作成日 = 2022年8月16日
+  投稿内容 = がんばりましたね！
+  公開範囲 = 友達間
+}
+
+object "：日記" as nikki1 {
+  作成日 = 2022年8月15日
+  投稿内容 = 明日の発表会、がんばります。
+  公開範囲 = 友達間
+}
+
+object "：日記" as nikki2 {
+  作成日 = 2022年8月14日
+  投稿内容 = 今日はいい天気！
+  公開範囲 = 全員
+}
+
+object "佐藤のタイムライン：タイムライン" as sato_timeline
+
+object "田中のタイムライン：タイムライン" as tanaka_timeline
+
+sato -- tomodachi
+tanaka -- tomodachi
+sato -- comment
+sato -- nikki1
+tanaka -- nikki2
+comment -- nikki1
+nikki1 -- sato_timeline
+nikki1 -- tanaka_timeline
+nikki2 -- sato_timeline
+nikki2 -- tanaka_timeline
+
+@enduml

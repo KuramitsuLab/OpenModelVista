@@ -1,0 +1,14 @@
+@startuml
+
+rectangle "トップページ" as top
+rectangle "ニュース一覧" as news_list
+rectangle "ニュース詳細" as news_detail
+rectangle "サービス紹介\nページ" as service_intro
+rectangle "サービス申し込み" as service_apply
+
+top --> news_list
+news_list --> news_detail
+top --> service_intro
+service_intro --> service_apply
+
+@enduml

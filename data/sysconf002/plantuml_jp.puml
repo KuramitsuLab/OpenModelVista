@@ -1,0 +1,32 @@
+@startuml dg_powerpoint_ja-fs8
+
+skinparam backgroundColor white
+skinparam defaultTextAlignment center
+
+' クライアント
+node "クライアント1" as client1
+node "クライアント2" as client2
+
+' クラウド（インターネット）
+cloud " " as internet
+
+' ロードバランサー
+rectangle "ロードバランサー" as lb #orange
+
+' Webサーバ
+rectangle "Webサーバ1" as web1 #skyblue
+rectangle "Webサーバ2" as web2 #skyblue
+
+' データベースサーバ
+database "データベース\nサーバ" as db #lightgreen
+
+' 接続
+client1 --> internet
+client2 --> internet
+internet --> lb
+lb --> web1
+lb --> web2
+web1 --> db
+web2 --> db
+
+@enduml
