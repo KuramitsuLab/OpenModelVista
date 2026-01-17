@@ -1,0 +1,26 @@
+@startuml
+
+component "<<구성 요소>>\n직원" as 직원
+
+package "<<하위 시스템>>\n총 경비" {
+    component "<<component>>\n경비" as 경비
+    component "경비 계정 관리" as 경비계정관리
+    
+    interface "경비 등록 서비스" as ERS_Internal
+}
+
+interface "비용 등록 서비스" as ERS_External
+interface "급여 서비스" as 급여서비스
+interface "입금 지시" as 입금지시
+interface "인출 지시" as 인출지시
+
+직원 -- ERS_External
+직원 --( 급여서비스
+
+ERS_External ..> ERS_Internal : <<위임>>
+ERS_Internal --> 경비
+
+경비 -- 입금지시
+경비계정관리 -- 인출지시
+
+@enduml

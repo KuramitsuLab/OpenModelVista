@@ -1,0 +1,42 @@
+@startuml dg_powerpoint_ja-fs8
+
+skinparam backgroundColor white
+skinparam defaultTextAlignment center
+
+' ユーザー
+actor "Users" as users
+
+' AWSサービス
+rectangle "Amazon CloudFront" as cloudfront
+storage "Amazon S3" as s3
+rectangle "Amazon Route 53" as route53
+rectangle "Elastic Load\nBalancing" as elb
+
+' Auto Scaling group（点線枠）
+rectangle "Auto Scaling\ngroup" as asg #line.dashed {
+    rectangle "Amazon EC2" as ec2_1
+    rectangle "Amazon EC2" as ec2_2
+    rectangle "Amazon EC2" as ec2_3
+}
+
+database "Amazon RDS" as rds
+rectangle "Amazon CloudWatch" as cloudwatch
+
+' 接続
+users --> cloudfront
+cloudfront --> s3
+
+users --> elb
+route53 --> elb
+
+elb --> ec2_1
+elb --> ec2_2
+elb --> ec2_3
+
+ec2_1 --> rds
+ec2_2 --> rds
+ec2_3 --> rds
+
+asg --> cloudwatch
+
+@enduml

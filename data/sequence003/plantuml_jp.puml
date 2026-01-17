@@ -1,0 +1,31 @@
+@startuml
+actor "Aさん：アクター" as actor
+participant "：ログイン画面" as login_screen
+participant "：ログイン処理" as login_process
+participant "：会員リスト" as member_list
+participant "Aさんの会員情報：会員情報" as member_info
+
+actor -> login_screen: ログイン情報を入力する(会員番号,パスワード)
+activate login_screen
+login_screen -> login_process: ログインする(会員番号,パスワード)
+activate login_process
+
+login_process -> member_list: Aさんの会員情報=会員情報を取得する(会員番号)
+activate member_list
+member_list --> login_process
+deactivate member_list
+
+login_process -> member_info: 認証結果=認証する(パスワード)
+activate member_info
+member_info --> login_process
+deactivate member_info
+
+alt 認証結果=OK
+    login_process --> login_screen: 会員サービス画面へ遷移する()
+else 認証結果=NG
+    login_process --> login_screen: 認証エラー画面へ遷移する()
+end
+
+deactivate login_process
+destroy login_screen
+@enduml

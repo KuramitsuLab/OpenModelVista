@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+group ref Selecting processing for the book management system
+end group
+
+if () then ([Books to return])
+    group ref Returning books
+    end group
+else ([Books to borrow])
+    group ref Borrow a book
+    end group
+endif
+
+stop
+
+@enduml

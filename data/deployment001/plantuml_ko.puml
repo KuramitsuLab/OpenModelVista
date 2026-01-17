@@ -1,0 +1,16 @@
+@startuml
+
+node "프린터" as 프린터
+
+node "데스크톱 클라이언트" as 데스크톱클라이언트 {
+    component "사용자\n인터페이스" as UI
+}
+
+node "중앙 서버" as 중앙서버 {
+    component "데이터베이스" as 데이터베이스
+}
+
+프린터 -- 데스크톱클라이언트
+데스크톱클라이언트 -- 중앙서버
+
+@enduml

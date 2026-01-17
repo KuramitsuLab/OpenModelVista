@@ -1,0 +1,20 @@
+@startuml
+
+package "ui" {
+}
+
+package "control" {
+}
+
+package "db access" {
+}
+
+package "entity" {
+}
+
+control ..> ui
+control ..> "db access"
+control ..> entity
+"db access" ..> entity
+
+@enduml

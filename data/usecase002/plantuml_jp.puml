@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+
+actor "預金者" as Depositor
+actor "振込依頼者" as RemittanceRequester
+actor "他銀行" as OtherBank
+
+RemittanceRequester --|> Depositor
+
+rectangle "ATM" {
+    usecase "暗証番号を入力する" as EnterPIN
+    usecase "預金を引き出す" as WithdrawMoney
+    usecase "預金を預け入れる" as DepositMoney
+    usecase "通帳を記入する" as UpdatePassbook
+    usecase "口座振込（振替）を依頼する" as RequestTransfer
+}
+
+Depositor ..> EnterPIN : <<include>>
+Depositor --> WithdrawMoney
+Depositor --> DepositMoney
+Depositor --> UpdatePassbook
+
+WithdrawMoney ..> EnterPIN : <<include>>
+
+RemittanceRequester --> RequestTransfer
+OtherBank --> RequestTransfer
+
+@enduml

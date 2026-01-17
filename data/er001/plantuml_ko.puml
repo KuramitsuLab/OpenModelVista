@@ -1,0 +1,35 @@
+@startuml
+
+entity "사용자 (users)" as users {
+    * id (ID)
+    --
+    이름 (이름)
+    이메일 (이메일 주소)
+    삭제 플래그 (delete flag)
+}
+
+entity "lendings (대출 상태)" as lendings {
+    * id (ID)
+    --
+    user_id (사용자 ID)
+    book_id (책 ID)
+    lent_at (대출 날짜 및 시간)
+    반납일시 (반납 날짜 및 시간)
+}
+
+entity "books (컬렉션)" as books {
+    * id (ID)
+    --
+    title (제목)
+    author (저자)
+    publisher (출판사)
+    published_at (출판일)
+    ISBN
+    가격 (가격)
+    삭제 플래그 (삭제 플래그)
+}
+
+users ||--o{ lendings
+lendings }o--|| books
+
+@enduml

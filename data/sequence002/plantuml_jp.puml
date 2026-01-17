@@ -1,0 +1,44 @@
+@startuml
+actor "個人顧客\nアクター" as actor
+participant "普通預金\nインターフェース" as interface
+participant "普通預金入金\nコントロール" as control
+participant "個人顧客" as customer
+participant "普通預金\n口座" as account
+participant "他店券\n明細" as check
+participant "未記帳" as unrecorded
+
+actor -> interface: 入金依頼
+activate interface
+interface -> control: 入金依頼
+activate control
+
+control -> customer: 口座確認
+activate customer
+customer --> control
+deactivate customer
+
+control -> account: 口座確認
+activate account
+account --> control
+deactivate account
+
+control -> account: 入金
+activate account
+account --> control
+deactivate account
+
+control -> check: 他店券
+activate check
+check --> control
+deactivate check
+
+control -> unrecorded: 未記帳
+activate unrecorded
+unrecorded --> control
+deactivate unrecorded
+
+control --> interface
+deactivate control
+interface --> actor
+deactivate interface
+@enduml

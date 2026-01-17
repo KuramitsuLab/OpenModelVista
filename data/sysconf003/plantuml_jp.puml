@@ -1,0 +1,44 @@
+@startuml dg_powerpoint_ja-fs8
+
+skinparam backgroundColor white
+skinparam defaultTextAlignment center
+
+' 左側エリア（グレー背景）
+rectangle " " as left_area #lightgray {
+    node "ルータ" as router
+    node "ファイル\nサーバ" as fileserver
+    database "DB\nサーバ" as dbserver
+    
+    router -- fileserver
+    fileserver -- dbserver
+}
+
+' 中央エリア（オレンジ背景）
+rectangle " " as center_area #mistyrose {
+    database "処理サーバ" as proc_server
+    node "ログ処理" as log_proc
+    node "APサーバ&\nWebサーバ" as ap_web
+    collections "メール\n配信" as mail
+    
+    log_proc --> proc_server
+    log_proc --> mail
+    log_proc -- ap_web
+}
+
+' 右側エリア（緑背景）- 社内LAN
+rectangle "社内 LAN" as right_area #palegreen {
+    node "ハブ" as hub
+    node "クライアントPC1" as pc1
+    node "クライアントPC2" as pc2
+    node "クライアントPC3" as pc3
+    
+    hub --> pc1
+    hub --> pc2
+    hub --> pc3
+}
+
+' エリア間の接続
+fileserver --> log_proc : ログ\n出力
+ap_web --> hub
+
+@enduml

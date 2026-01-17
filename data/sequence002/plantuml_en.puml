@@ -1,0 +1,44 @@
+@startuml
+actor "Individual\nCustomer\n(Actor)" as actor
+participant "Savings\nDeposit\nInterface" as interface
+participant "Savings\nDeposit\nControl" as control
+participant "Individual\nCustomer" as customer
+participant "Savings\nAccount" as account
+participant "Inter-Branch\nTransaction\nDetails" as details
+participant "Unrecorded\nTransactions" as unrecorded
+
+actor -> interface: Deposit Request
+activate interface
+interface -> control: Deposit Request
+activate control
+
+control -> customer: Account Verification
+activate customer
+customer --> control
+deactivate customer
+
+control -> account: Account Verification
+activate account
+account --> control
+deactivate account
+
+control -> account: Deposit
+activate account
+account --> control
+deactivate account
+
+control -> details: Inter-Branch Transaction
+activate details
+details --> control
+deactivate details
+
+details -> unrecorded: Unrecorded Transactions
+activate unrecorded
+unrecorded --> control
+deactivate unrecorded
+
+control --> interface
+deactivate control
+interface --> actor
+deactivate interface
+@enduml

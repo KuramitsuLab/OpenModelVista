@@ -1,0 +1,27 @@
+@startgantt
+
+Project starts 1998-01-01
+
+[1단계 테스트] starts 1998-01-01 and ends 1998-02-05
+
+[테스트 케이스 정의] starts 1998-01-01 and ends 1998-01-08
+
+[테스트 계획 수립] starts 1998-01-09 and ends 1998-01-22
+
+[테스트 계획 검증] starts 1998-01-09 and ends 1998-01-22
+
+[종합 테스트] starts 1998-01-23 and ends 1998-02-01
+
+[인터페이스 테스트] starts 1998-01-23 and ends 1998-02-01
+
+[결과 문서화] starts 1998-01-23 and ends 1998-02-01
+
+[시스템 테스트] starts 1998-02-02 and ends 1998-02-17
+
+[성능 테스트] starts 1998-02-02 and ends 1998-02-17
+
+[구성 테스트] starts 1998-02-02 and ends 1998-02-17
+
+[결과 문서화 2] starts 1998-02-17 and ends 1998-02-24
+
+@endgantt

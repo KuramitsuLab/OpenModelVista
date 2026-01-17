@@ -1,0 +1,30 @@
+@startuml dg_powerpoint_ja-fs8
+
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0
+
+skinparam backgroundColor white
+skinparam defaultTextAlignment center
+
+' クライアント端末
+node "お客様端末1" as client1
+node "お客様端末2" as client2
+node "お客様端末3" as client3
+
+' インターネット
+cloud "インターネット" as internet
+
+' AMMデータ管理センタ
+rectangle "AMMデータ管理センタ" as datacenter {
+    rectangle "新幹線チケット予約システム" as reservation #line.dashed;line:red {
+        node "APサーバ" as ap_server
+        node "DBサーバ" as db_server
+    }
+}
+
+' 接続
+client1 -- internet
+client2 -- internet
+client3 -- internet
+internet -- datacenter
+
+@enduml

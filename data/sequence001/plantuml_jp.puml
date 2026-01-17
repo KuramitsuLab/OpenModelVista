@@ -1,0 +1,22 @@
+@startuml
+participant "ユーザー" as user
+participant "棚" as shelf
+participant "書籍" as book
+
+user -> shelf: 検索
+activate shelf
+shelf --> user: 検索結果
+deactivate shelf
+
+user -> book: 貸出申請
+activate book
+book --> user: 貸出結果
+deactivate book
+
+activate user
+user -> book: 返却申請
+activate book
+book --> user: 返却結果
+deactivate book
+deactivate user
+@enduml

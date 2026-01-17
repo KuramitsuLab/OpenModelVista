@@ -1,0 +1,26 @@
+@startuml
+
+artifact "<<artifact>>\nNXT Hardware" as NXTHardware {
+    node "<<device>>\nMain processor Atmel ARM7" as MainProcessor {
+        node "<<execution\nenvironment>>\nEnhanced NXT firmware" as EnhancedNXT
+    }
+    node "<<device>>\nSubprocessor Atmel AVR" as Subprocessor
+}
+
+artifact "<<artifact>>\nTracking programme" as TrackingProgramme
+artifact "<<artifact>>\nSensor and motor control\nprogramme" as SensorMotorProgramme
+
+component "<<component>>\nUI" as UI
+component "<<component>>\nTraverse Strategy" as TraverseStrategy
+component "<<component>>\nDevice Driver" as DeviceDriver
+component "<<component>>\nMechanism" as Mechanism
+
+TrackingProgramme ..> EnhancedNXT : <<deploy>>
+SensorMotorProgramme ..> Subprocessor : <<deploy>>
+
+TrackingProgramme ..> UI : <<manifest>>
+TrackingProgramme ..> TraverseStrategy : <<manifest>>
+TraverseStrategy ..> DeviceDriver : <<manifest>>
+TraverseStrategy ..> Mechanism : <<manifest>>
+
+@enduml

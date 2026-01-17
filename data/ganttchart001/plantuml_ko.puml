@@ -1,0 +1,22 @@
+@startgantt
+
+projectscale weekly
+Project starts 2024-01-01
+
+-- 1개월 --
+[안정적인 상업적] happens at 2024-01-01
+[상업적 데뷔] starts 2024-01-01 and ends 2024-05-21
+
+-- 2개월 --
+[공급업체 백업 계획 마감일] happens at 2024-02-01
+
+-- 3개월 --
+[상업적 과정 개선 세션] happens at 2024-03-22
+[무작위 IV&V 감사] starts 2024-03-01 and ends 2024-04-28
+
+-- 4개월 --
+
+-- 5개월 --
+[상업적 과정 개선 세션] happens at 2024-05-22
+
+@endgantt

@@ -1,0 +1,19 @@
+@startuml
+
+node "<<device>>\nServer machine" as ServerMachine {
+    node "<<executionEnvironment>>\nLinux" as Linux {
+        artifact "sendmail" as sendmail
+        artifact "pop" as pop
+    }
+}
+
+node "<<device>>\nClient machine" as ClientMachine {
+    node "<<executionEnvironment>>\nJRE" as JRE {
+        artifact "MailChecker.jar" as MailChecker
+    }
+    artifact "Mailer.exe" as Mailer
+}
+
+ServerMachine "1" -- "*" ClientMachine
+
+@enduml

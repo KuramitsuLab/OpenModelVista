@@ -1,0 +1,35 @@
+@startuml
+
+title 蔵書管理システムデータベース
+
+entity "users" as users {
+  * id
+  --
+  name
+  email
+}
+
+entity "lendings" as lendings {
+  * id
+  --
+  user_id
+  book_id
+  lent_at
+  returned_at
+}
+
+entity "books" as books {
+  * id
+  --
+  title
+  author
+  publisher
+  published_at
+  isbn
+  price
+}
+
+users ||--o{ lendings : user_id
+books ||--o{ lendings : book_id
+
+@enduml

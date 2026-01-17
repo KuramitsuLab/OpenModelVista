@@ -1,0 +1,35 @@
+@startuml
+
+object "Nora：作業者" as nora
+
+object "：作業" as sagyo1 {
+  名前 = "実装"
+}
+
+object "Phillip：作業者" as phillip {
+  ID = 2
+  名前 = "Phillip"
+  - メールアドレス[1] = "ph@myorg.org"
+  - メールアドレス[2] = ""
+  - メールアドレス[3] = "p.h@myorg.org"
+  - メールアドレス[4] = ""
+  - メールアドレス[5] = "phillip@myorg.org"
+}
+
+object "テスト：作業" as test {
+  説明 = "システムが要件を満たしていることを確認する。"
+}
+
+object "テスト仕様書：作業成果物" as testspec {
+  名前：String = "Test 0015"
+  -説明 = "正しいユーザ名とパスワードを使ってユーザが\nログインできるかどうかをテストする。"
+}
+
+object "XYZ" as xyz
+
+object "：作業成果物" as seikabutsu {
+  名前 = "システム"
+  - 進捗度：Real = 80
+}
+
+@enduml

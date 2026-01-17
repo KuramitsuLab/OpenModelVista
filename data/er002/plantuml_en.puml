@@ -1,0 +1,56 @@
+@startuml
+
+entity "Branch" as Branch {
+    * Branch Code
+}
+
+entity "Person in charge" as PersonInCharge {
+    * Person in Charge Name
+    --
+    Person in Charge Code
+}
+
+entity "Customer" as Customer {
+    * Customer Code
+    --
+    Customer Name
+    Address
+}
+
+entity "Order" as Order {
+    * Order No
+    --
+    Order Date
+}
+
+entity "Packing" as Packing {
+    * Packing Date
+    --
+    Order ID (FK)
+    Person in Charge ID (FK)
+}
+
+entity "Order Details" as OrderDetails {
+    * Product
+    --
+    Quantity
+    Unit
+    Price
+    Amount
+}
+
+entity "Product" as Product {
+    * Product
+    --
+    Unit price
+}
+
+Branch ||..o{ Order
+PersonInCharge ||..o{ Order
+PersonInCharge ||..o{ Packing
+Customer ||..o{ Order
+Order ||..o{ Packing
+Order ||..o{ OrderDetails
+Product ||..o{ OrderDetails
+
+@enduml

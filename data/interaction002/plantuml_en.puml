@@ -1,0 +1,52 @@
+@startuml
+
+title sd online shopping
+
+start
+
+group sd Register as a member
+    participant ": User" as User
+    participant ": Register as a\nmember Screen" as RegScreen
+    participant ": Register as a\nMember\nManagement" as RegMgmt
+    participant ": Member" as Member
+    
+    User -> RegScreen : Enter Member Information
+    RegScreen -> RegMgmt : Register a member
+    RegMgmt --> Member ** : Create
+end group
+
+group ref Members log in
+end group
+
+if () then ([No items in shopping basket])
+    group sd Add items to shopping basket
+        participant ": Member" as Member2
+        participant ": Shopping\nbasket Screen" as BasketScreen
+        participant ": Shopping\nbasket\nManagement" as BasketMgmt
+        participant ": Shopping\nbasket" as Basket
+        
+        Member2 -> BasketScreen : Add items
+        BasketScreen -> BasketMgmt : Add items
+        BasketMgmt --> Basket ** : Create
+    end group
+else ([Items in shopping basket])
+endif
+
+group ref View items in shopping basket
+end group
+
+group sd Place order
+    participant ": Member" as Member3
+    participant ": Order\nScreen" as OrderScreen
+    participant ": Order\nManagement" as OrderMgmt
+    participant ": Order" as Order
+    
+    Member3 -> OrderScreen : Confirm Order
+    OrderScreen -> OrderMgmt : Register Order
+    OrderMgmt --> Order ** : Create
+    OrderMgmt -> Order : Set shopping basket items
+end group
+
+stop
+
+@enduml

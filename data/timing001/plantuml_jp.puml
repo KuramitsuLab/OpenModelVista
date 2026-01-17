@@ -1,0 +1,27 @@
+@startuml
+title sd 取引開始から正常終了
+
+robust "ATM" as ATM
+
+@0
+ATM is 待機中
+
+@100
+ATM is 認証中
+
+@200
+ATM is 使用中
+
+@300
+ATM is 待機中
+
+@50
+ATM -> ATM : 取引開始
+
+@150
+ATM -> ATM : 認証完了
+
+@250
+ATM -> ATM : 取引終了
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+component "<<component>>\nEmployee" as Employee
+
+package "<<subsystem>>\nTotal Expenses" {
+    component "<<component>>\nExpenses" as Expenses
+    component "Expense Account\nManagement" as ExpenseAccountManagement
+    
+    interface "Expense\nRegistration\nService" as ERS_Internal
+}
+
+interface "Expense\nRegistration\nService" as ERS_External
+interface "Payroll Service" as PayrollService
+interface "Deposit Instructions" as DepositInstructions
+interface "Withdrawal Instructions" as WithdrawalInstructions
+
+Employee -- ERS_External
+Employee --( PayrollService
+
+ERS_External ..> ERS_Internal : <<delegate>>
+ERS_Internal --> Expenses
+
+Expenses -- DepositInstructions
+ExpenseAccountManagement -- WithdrawalInstructions
+
+@enduml
